@@ -30,15 +30,14 @@ def train(epoch, model, train_loader, criterion, optimizer, device):
     print(f'Train Epoch: {epoch} Loss: {train_loss:.6f} Acc: {train_accuracy:.2f}%', flush=True)
 
     # Validation loop
-def validate(model, val_loader, criterion):
+def validate(model, val_loader, criterion, device):
     model.eval()
     val_loss = 0
-
     correct, total = 0, 0
 
     with torch.no_grad():   # disabilita il calcolo dei gradienti (risparmia memoria e tempo)
-        for batch_idx, (inputs, targets) in enumerate(val_loader):
-            inputs, targets = inputs.cuda(), targets.cuda()
+        for inputs, targets in enumerate(val_loader):
+            inputs, targets = inputs.to(device), targets.to(device)
 
             # todo...
             # Forward pass
