@@ -1,6 +1,6 @@
 import torch
 
-def train(epoch, model, train_loader, criterion, optimizer):
+def train(epoch, model, train_loader, criterion, optimizer, device):
     print("Funzione train avviata!", flush=True)
     running_loss = 0.0
     correct = 0
@@ -11,7 +11,7 @@ def train(epoch, model, train_loader, criterion, optimizer):
 
     for batch_idx, (inputs, targets) in enumerate(train_loader):
         print(f"Batch {batch_idx}", flush=True)
-        inputs, targets = inputs.cuda(), targets.cuda()
+        inputs, targets = inputs.to(device), targets.to(device)
 
         # todo...
         optimizer.zero_grad()     #azzera i gradienti accumulati
