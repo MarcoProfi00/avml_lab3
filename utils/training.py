@@ -2,6 +2,7 @@ import torch
 
 def train(epoch, model, train_loader, criterion, optimizer, device):
     print("Funzione train avviata!", flush=True)
+    model.train()
     running_loss = 0.0
     correct = 0
     total = 0
@@ -36,7 +37,7 @@ def validate(model, val_loader, criterion, device):
     correct, total = 0, 0
 
     with torch.no_grad():   # disabilita il calcolo dei gradienti (risparmia memoria e tempo)
-        for inputs, targets in enumerate(val_loader):
+        for inputs, targets in val_loader:
             inputs, targets = inputs.to(device), targets.to(device)
 
             # todo...
