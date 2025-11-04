@@ -1,5 +1,19 @@
 import torch
 
+import wandb
+
+# 🔹 Inizializza il progetto W&B
+wandb.init(
+    project="tiny-imagenet-lab2",
+    config={
+        "batch_size": 32,
+        "epochs": 2,
+        "optimizer": "SGD",
+        "lr": 0.001,
+        "momentum": 0.9,
+    }
+)
+
 def train(epoch, model, train_loader, criterion, optimizer, device):
     print("Funzione train avviata!", flush=True)
     model.train()
@@ -29,6 +43,7 @@ def train(epoch, model, train_loader, criterion, optimizer, device):
     train_loss = running_loss / len(train_loader) #ottiene la loss media
     train_accuracy = 100. * correct / total
     print(f'Train Epoch: {epoch} Loss: {train_loss:.6f} Acc: {train_accuracy:.2f}%', flush=True)
+    return train_loss, train_accuracy
 
     # Validation loop
 def validate(model, val_loader, criterion, device):
